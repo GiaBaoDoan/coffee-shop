@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Manrope } from "next/font/google";
+import LenisProvider from "@/providers/lenis-providerlenis-provider";
+import BackToTop from "@/components/layout/BackTop";
+import Header from "@/components/layout/Header";
+import BrandSection from "@/components/home/BrandSection";
+import Footer from "@/components/layout/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+export const manrope = Manrope({
   subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${manrope.className}  antialiased`}>
+        <Header />
+        <BackToTop />
+        <LenisProvider>{children}</LenisProvider>
+        <BrandSection />
+        <Footer />
+        <Toaster />
       </body>
     </html>
   );
