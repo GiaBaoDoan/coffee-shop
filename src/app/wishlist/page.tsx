@@ -1,9 +1,8 @@
-import ShareButtons from "@/components/wishlist/ShareButtons";
 import Wishlist from "@/components/wishlist/Wishlist";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-const page = () => {
+const WishlistPage = () => {
   return (
     <div>
       {/* tieu de trang lien he */}
@@ -33,4 +32,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default WishlistPage;

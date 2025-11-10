@@ -1,4 +1,3 @@
-import { validateDiscountCode } from "@/apis/discount";
 import { BASE_URL } from "@/constants/api";
 import { Discount } from "@/types/discount";
 import { create } from "zustand";

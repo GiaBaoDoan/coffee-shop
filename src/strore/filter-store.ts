@@ -30,7 +30,7 @@ interface FilterStore {
   resetFilter: () => void;
 }
 
-export const UseFilterStore = create<FilterStore>((set, get) => ({
+export const UseFilterStore = create<FilterStore>((set) => ({
   categories: [],
   setProductCat: (categories) => set({ categories }),
   sort: "default",

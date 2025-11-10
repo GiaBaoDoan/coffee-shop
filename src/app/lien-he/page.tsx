@@ -2,7 +2,7 @@ import ContactForm from "@/components/contact/contact-form";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="min-h-screen">
       {/* tieu de trang lien he */}
@@ -90,4 +90,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

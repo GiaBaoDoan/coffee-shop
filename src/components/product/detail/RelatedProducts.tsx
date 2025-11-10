@@ -27,7 +27,7 @@ const ProductRelatest = () => {
         setLoading(true);
         const data = await getLastestProducts();
         setProducts(data);
-      } catch (error) {
+      } catch {
         setLoading(false);
         setProducts([]);
       } finally {

@@ -26,7 +26,9 @@ const ContactForm = () => {
     },
   });
 
-  const onSubmit = (data: ContactSchema) => {};
+  const onSubmit = (data: ContactSchema) => {
+    return data;
+  };
 
   return (
     <Form {...form}>

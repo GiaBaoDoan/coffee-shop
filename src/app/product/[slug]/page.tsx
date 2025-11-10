@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ProductDetails from "@/components/product/detail/ProductDetails";
 
-const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
 
   const product = await getProductDetail(slug);
@@ -48,4 +48,4 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 };
 
-export default page;
+export default Page;

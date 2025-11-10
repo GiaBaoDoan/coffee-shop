@@ -3,7 +3,7 @@ import { formatVND } from "@/lib/utils";
 import { Mail, PenOff, Phone, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 
-const page = async ({
+const Page = async ({
   searchParams,
 }: {
   searchParams: Promise<{ orderId?: string }>;
@@ -186,4 +186,4 @@ const page = async ({
   );
 };
 
-export default page;
+export default Page;

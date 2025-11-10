@@ -1,11 +1,11 @@
 import { getLastestProducts, getProducts } from "@/apis/product";
-import { TypeSearchParams } from "@/types/api";
+import { PaginationMeta, TypeSearchParams } from "@/types/api";
 import { ChevronRight } from "lucide-react";
 import { getCategories } from "@/apis/catgories";
 import Link from "next/link";
 import Shop from "@/components/shop/Shop";
 
-const page = async ({
+const Page = async ({
   searchParams,
 }: {
   searchParams: Promise<TypeSearchParams>;
@@ -54,10 +54,10 @@ const page = async ({
         categories={categories}
         lastestProducts={lastestProducts}
         products={products}
-        meta={meta as any}
+        meta={meta as PaginationMeta}
       />
     </div>
   );
 };
 
-export default page;
+export default Page;

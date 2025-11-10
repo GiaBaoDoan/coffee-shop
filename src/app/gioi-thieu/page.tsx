@@ -2,7 +2,7 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="min-h-screen">
       {/* title */}
@@ -205,4 +205,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

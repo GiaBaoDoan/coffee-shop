@@ -77,7 +77,7 @@ export async function getProducts(
       data: json.data.map(mapProduct),
       meta: json.meta,
     };
-  } catch (error) {
+  } catch {
     return { data: [], meta: {} };
   }
 }

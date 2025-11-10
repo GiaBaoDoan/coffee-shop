@@ -1,4 +1,3 @@
-import { Discount } from "@/types/discount";
 import { PaymentMethod } from "@/types/order";
 
 export interface CheckoutItem {

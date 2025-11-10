@@ -14,10 +14,6 @@ import Link from "next/link";
 import { useCartStore } from "@/strore/cart-store";
 import ProductTabs from "@/components/product/detail/ProductTabs";
 
-function decodeHtml(str: string) {
-  return str.replace(/\\u003C/g, "<").replace(/\\u003E/g, ">");
-}
-
 const ProductDetails = ({ product }: { product: Product }) => {
   const { cart } = useCartStore();
 

@@ -16,7 +16,7 @@ import Link from "next/link";
 import { formatVND } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 
-const page = () => {
+const CartPage = () => {
   const { cart, removeFromCart, updateQuantity, getTotalPrice } =
     useCartStore();
 
@@ -176,4 +176,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CartPage;

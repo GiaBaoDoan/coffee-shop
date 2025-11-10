@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, formatVND, getDiscountPercent, getFinalPrice } from "@/lib/utils";
+import { cn, formatVND } from "@/lib/utils";
 import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import {

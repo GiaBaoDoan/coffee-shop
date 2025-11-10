@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   return (
     <section>
       <article className="h-[290px] px-7.5 py-22.5 bg-[url('https://cafengon.monamedia.net/wp-content/uploads/2023/04/bread-bg.png')] bg-cover bg-center bg-no-repeat">
@@ -27,4 +27,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

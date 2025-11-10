@@ -2,7 +2,7 @@
 
 import { useAccountStore } from "@/strore/account-store";
 
-const page = () => {
+const AccountPage = () => {
   const { account } = useAccountStore();
   return (
     <section>
@@ -22,4 +22,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AccountPage;
