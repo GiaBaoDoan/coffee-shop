@@ -83,3 +83,9 @@ export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
 export function getOrderStatusLabel(status: OrderStatus): string {
   return ORDER_STATUS_LABELS[status] || "Không xác định";
 }
+
+export function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === "string") return error;
+  return "Đã có lỗi xảy ra";
+}

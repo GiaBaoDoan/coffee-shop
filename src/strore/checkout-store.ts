@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/constants/api";
+import { getErrorMessage } from "@/lib/utils";
 import { CheckoutRequest } from "@/types/checkout";
 import { Order } from "@/types/order";
 import { create } from "zustand";
@@ -50,11 +51,11 @@ export const useCheckoutStore = create<CheckoutState>((set) => ({
         error: null,
         success: true,
       });
-    } catch (err: any) {
+    } catch (err) {
       set({
         order: null,
         loading: false,
-        error: err.message || "Đặt hàng thất bại",
+        error: getErrorMessage(err),
         success: false,
       });
     }

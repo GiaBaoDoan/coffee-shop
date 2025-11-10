@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/constants/api";
+import { getErrorMessage } from "@/lib/utils";
 import { Discount } from "@/types/discount";
 import { create } from "zustand";
 
@@ -36,11 +37,11 @@ export const useDiscountCode = create<DiscountState>((set) => ({
         error: null,
         success: true,
       });
-    } catch (error: any) {
+    } catch (error) {
       set({
         discount: null,
         loading: false,
-        error: error?.message || "Đã có lỗi xảy ra",
+        error: getErrorMessage(error),
         success: false,
       });
     }

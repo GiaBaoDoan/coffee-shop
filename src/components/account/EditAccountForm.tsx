@@ -42,7 +42,7 @@ const EditAccountForm = () => {
 
   useEffect(() => {
     if (account) form.reset(account);
-  }, [account]);
+  }, [account, form]);
 
   return (
     <div>

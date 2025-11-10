@@ -44,7 +44,7 @@ const DiscountCodeForm = () => {
     if (hasError) {
       useDiscountCode.setState({ success: false });
     }
-  }, [form.formState.errors.code]);
+  }, [form.formState.errors.code, form]);
 
   return (
     <div className="px-5">

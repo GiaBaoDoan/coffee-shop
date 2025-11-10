@@ -85,13 +85,13 @@ const CheckoutForm = () => {
       listOrders(order);
       clearCheckoutStore();
     }
-  }, [success, router, order, clearCart]);
+  }, [success, router, order, clearCart, clearCheckoutStore, listOrders]);
 
   useEffect(() => {
     if (account) {
       form.reset(account);
     }
-  }, [account]);
+  }, [account, form]);
 
   return (
     <section>
