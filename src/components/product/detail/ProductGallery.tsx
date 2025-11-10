@@ -4,13 +4,13 @@ import { cn, getDiscountPercent } from "@/lib/utils";
 import { Product } from "@/types/product";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useState } from "react";
+import { Lens } from "@/components/ui/lens";
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import Magnifier from "react-magnifier";
 import Image from "next/image";
 
 const ProductGallery = ({
@@ -33,25 +33,20 @@ const ProductGallery = ({
   const handlePrev = () => api?.scrollPrev();
   const handleNext = () => api?.scrollNext();
 
-  const MagnifierAny = Magnifier as any;
-
   return (
     <section>
       <div className="border border-[#d9d9d9] relative">
         <div className="flex justify-center items-center">
           {zommImage ? (
-            <MagnifierAny
-              src={product.images[activeIndex].url}
-              width={575}
-              height={575}
-              mgWidth={150}
-              mgHeight={150}
-              style={{
-                width: "100%", // ép ảnh bằng container
-                height: "100%",
-                objectFit: "contain", // hoặc "contain" nếu không muốn crop
-              }}
-            />
+            <Lens>
+              <Image
+                src={product.images[activeIndex].url}
+                alt={product.images[activeIndex].alternativeText as string}
+                width={575}
+                height={575}
+                className="w-[575px] h-[575px] object-contain"
+              />
+            </Lens>
           ) : (
             <Image
               src={product.images[activeIndex].url}

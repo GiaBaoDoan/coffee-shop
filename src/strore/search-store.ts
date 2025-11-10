@@ -1,3 +1,5 @@
+import { buildProductImageUrl } from "@/apis/product";
+import { BASE_URL } from "@/constants/api";
 import { Product } from "@/types/product";
 import { create } from "zustand";
 
@@ -17,7 +19,7 @@ export const useSearchStore = create<SearchStore>((set) => ({
   fetchResults: async (q) => {
     set({ loading: true });
     try {
-      const res = await fetch(`http://localhost:1337/api/products?search=${q}`);
+      const res = await fetch(`${BASE_URL}/api/products?search=${q}`);
 
       if (!res.ok) {
         throw new Error("Network response was not ok");
@@ -29,7 +31,7 @@ export const useSearchStore = create<SearchStore>((set) => ({
         ...item,
         images: item.images.map((img) => ({
           ...img,
-          url: `http://localhost:1337${img.url}`,
+          url: buildProductImageUrl(img.url),
         })),
       }));
 

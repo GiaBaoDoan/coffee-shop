@@ -2,7 +2,7 @@ import { BASE_URL } from "@/constants/api";
 import { Product } from "@/types/product";
 import { ResponseDataApi, TypeSearchParams } from "@/types/api";
 
-function buildProductImageUrl(url: string) {
+export function buildProductImageUrl(url: string) {
   if (!url.startsWith("http")) {
     return `${BASE_URL}${url}`;
   }
