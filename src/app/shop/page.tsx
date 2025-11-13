@@ -17,11 +17,13 @@ const Page = async ({
   const [{ data: products, meta }, categories = [], lastestProducts = []] =
     await Promise.all([
       getProducts(params),
-      // getCategories(),
-      // getLastestProducts(),
+      getCategories(),
+      getLastestProducts(),
     ]);
 
   const search = params.search;
+
+  console.log(products);
 
   return (
     <div>
