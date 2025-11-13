@@ -10,15 +10,18 @@ const Page = async ({
 }: {
   searchParams: Promise<TypeSearchParams>;
 }) => {
-  // Chạy song song cho nhanh hơn
+  // Chờ searchParams resolve 1 lần
+  const params = await searchParams;
+
+  // Chạy song song các request
   const [{ data: products, meta }, categories = [], lastestProducts = []] =
     await Promise.all([
-      getProducts(await searchParams),
+      getProducts(params),
       getCategories(),
       getLastestProducts(),
     ]);
 
-  const search = (await searchParams).search;
+  const search = params.search;
 
   return (
     <div>
