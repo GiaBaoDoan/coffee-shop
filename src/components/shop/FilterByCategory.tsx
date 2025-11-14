@@ -1,10 +1,19 @@
 "use client";
 
+import { useCategoryStore } from "@/strore/categories-store";
 import { UseFilterStore } from "@/strore/filter-store";
-import { Category } from "@/types/product";
+import { useEffect } from "react";
 
-const FilterByCategory = ({ categories }: { categories: Category[] }) => {
+const FilterByCategory = () => {
   const { toggleCategory, categories: data } = UseFilterStore();
+
+  const { categories, fetchCategories, loading } = useCategoryStore();
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  if (loading) return <p>Đang tải...</p>;
 
   return (
     <section>

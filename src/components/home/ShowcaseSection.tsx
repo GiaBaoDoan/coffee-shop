@@ -12,13 +12,20 @@ import {
 } from "@/components/ui/carousel";
 import { useCarousel } from "@/hook/useCarousel";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "@/components/product/ProductCard";
-import { Product } from "@/types/product";
+import { useLatestProductsStore } from "@/strore/latest-products-store";
 
-const ProductShowcaseSection = ({ products }: { products: Product[] }) => {
+const ProductShowcaseSection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const { currentSlide, totalSlides } = useCarousel(api);
+
+  const { fetchLatestProducts, loading, latestProducts } =
+    useLatestProductsStore();
+
+  useEffect(() => {
+    fetchLatestProducts();
+  }, [fetchLatestProducts]);
 
   return (
     <section className="relative bg-[#F8F8F8] mb-15">
@@ -33,8 +40,8 @@ const ProductShowcaseSection = ({ products }: { products: Product[] }) => {
           className="scale-y-50"
           fill="white"
           d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
-	c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
-	c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"
+	        c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
+        	c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"
         ></path>
       </svg>
       {/* main content */}
@@ -49,26 +56,36 @@ const ProductShowcaseSection = ({ products }: { products: Product[] }) => {
           </p>
         </div>
         {/* products list */}
-        <Carousel opts={{ align: "start", slidesToScroll: 1 }} setApi={setApi}>
-          <CarouselContent>
-            {products.map((prd) => {
-              return (
-                <CarouselItem key={prd.id || prd.slug} className="basis-1/4">
-                  <ProductCard product={prd} />
-                </CarouselItem>
-              );
-            })}
-          </CarouselContent>
 
-          {/* Arrows + Index */}
-          <div className="absolute -bottom-14 left-1/2 flex items-center gap-2 -translate-x-1/2">
-            <CarouselPrevious />
-            <div className="text-[#333]">
-              {totalSlides === 0 ? "0 / 0" : `${currentSlide} / ${totalSlides}`}
+        {loading ? (
+          "Đang tải dữ liệu"
+        ) : (
+          <Carousel
+            opts={{ align: "start", slidesToScroll: 1 }}
+            setApi={setApi}
+          >
+            <CarouselContent>
+              {latestProducts.map((prd) => {
+                return (
+                  <CarouselItem key={prd.id || prd.slug} className="basis-1/4">
+                    <ProductCard product={prd} />
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+
+            {/* Arrows + Index */}
+            <div className="absolute -bottom-14 left-1/2 flex items-center gap-2 -translate-x-1/2">
+              <CarouselPrevious />
+              <div className="text-[#333]">
+                {totalSlides === 0
+                  ? "0 / 0"
+                  : `${currentSlide} / ${totalSlides}`}
+              </div>
+              <CarouselNext />
             </div>
-            <CarouselNext />
-          </div>
-        </Carousel>
+          </Carousel>
+        )}
 
         <div className="absolute -bottom-20 -left-5 opacity-30">
           <Image
@@ -90,8 +107,8 @@ const ProductShowcaseSection = ({ products }: { products: Product[] }) => {
           fill="white"
           className="scale-y-50"
           d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7
-	c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
-	c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"
+	        c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4
+	        c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"
         ></path>
       </svg>
     </section>

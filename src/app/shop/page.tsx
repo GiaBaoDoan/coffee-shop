@@ -1,7 +1,6 @@
-import { getLastestProducts, getProducts } from "@/apis/product";
+import { getProducts } from "@/apis/product";
 import { PaginationMeta, TypeSearchParams } from "@/types/api";
 import { ChevronRight } from "lucide-react";
-import { getCategories } from "@/apis/catgories";
 import Link from "next/link";
 import Shop from "@/components/shop/Shop";
 
@@ -14,16 +13,9 @@ const Page = async ({
   const params = await searchParams;
 
   // Chạy song song các request
-  const [{ data: products, meta }, categories = [], lastestProducts = []] =
-    await Promise.all([
-      getProducts(params),
-      getCategories(),
-      getLastestProducts(),
-    ]);
+  const { data: products, meta } = await getProducts(params);
 
   const search = params.search;
-
-  console.log(products);
 
   return (
     <div>
@@ -55,12 +47,7 @@ const Page = async ({
           </div>
         </div>
       </article>
-      <Shop
-        categories={categories}
-        lastestProducts={lastestProducts}
-        products={products}
-        meta={meta as PaginationMeta}
-      />
+      <Shop products={products} meta={meta as PaginationMeta} />
     </div>
   );
 };

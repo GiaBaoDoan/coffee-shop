@@ -5,7 +5,7 @@ import React from "react";
 import { CircleAlert } from "lucide-react";
 import { UseFilterStore } from "@/strore/filter-store";
 import { cn } from "@/lib/utils";
-import { Category, Product } from "@/types/product";
+import { Product } from "@/types/product";
 import FilterSortBy from "@/components/shop/FilterSortBy";
 import FilterActive from "@/components/shop/FilterActive";
 import FilterCategoryProduct from "@/components/shop/FilterByCategory";
@@ -16,8 +16,6 @@ import Pagination from "@/components/shop/Pagination";
 import { useSyncFilters } from "@/hook/use-asysn-filter";
 
 interface ShopProps {
-  categories: Category[];
-  lastestProducts: Product[];
   products: Product[];
   meta: {
     pagination?: {
@@ -29,7 +27,7 @@ interface ShopProps {
   };
 }
 
-const Shop = ({ categories, lastestProducts, meta, products }: ShopProps) => {
+const Shop = ({ meta, products }: ShopProps) => {
   const { showFilterBar } = UseFilterStore();
 
   const { pagination } = meta;
@@ -69,9 +67,9 @@ const Shop = ({ categories, lastestProducts, meta, products }: ShopProps) => {
       <div className="grid grid-cols-12 items-start">
         {showFilterBar && (
           <div className="col-span-3 px-[15px] space-y-15">
-            <FilterCategoryProduct categories={categories} />
+            <FilterCategoryProduct />
             <FilterPriceProduct />
-            <LastestProduct lastestProducts={lastestProducts} />
+            <LastestProduct />
           </div>
         )}
 

@@ -62,13 +62,10 @@ export async function getProducts(
   if (page) params.append("page", String(page));
 
   try {
-    const res = await fetch(
-      `${BASE_URL}/api/products?${params.toString()}&populate[images][fields]=id,url,alternativeText`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const res = await fetch(`${BASE_URL}/api/products?${params.toString()}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
 
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -82,29 +79,6 @@ export async function getProducts(
     };
   } catch {
     return { data: [], meta: {} };
-  }
-}
-
-// 🆕 Lấy sản phẩm mới nhất
-export async function getLastestProducts(): Promise<Product[]> {
-  try {
-    const res = await fetch(
-      `${BASE_URL}/api/products?sort=createdAt:desc&populate[images][fields]=id,url,alternativeText`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
-
-    const json = await res.json();
-
-    return json.data.map(mapProduct);
-  } catch {
-    return [];
   }
 }
 

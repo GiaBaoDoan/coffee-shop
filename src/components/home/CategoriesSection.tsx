@@ -11,23 +11,24 @@ import {
 import { useCarousel } from "@/hook/useCarousel";
 
 import { MoveRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Category } from "@/types/product";
+import { useCategoryStore } from "@/strore/categories-store";
 
-export default function CategoriesSection({
-  categories,
-}: {
-  categories: Category[];
-}) {
+export default function CategoriesSection() {
   const [api, setApi] = useState<CarouselApi>();
   const { currentSlide, totalSlides } = useCarousel(api);
+
+  const { fetchCategories, loading, categories } = useCategoryStore();
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   return (
     <section className="max-w-[1290px] relative px-11 py-15 mx-auto">
       <div className="grid grid-cols-5 items-start gap-15">
-        {/* Left: Giới thiệu */}
         <div className="col-span-2">
           <div className="flex flex-col gap-2.5 pr-5">
             <h2 className="uppercase text-3xl text-[#2b0a00] font-semibold">
@@ -70,47 +71,51 @@ export default function CategoriesSection({
             </p>
           </div>
 
-          <Carousel
-            opts={{
-              align: "start",
-              duration: 20,
-              dragFree: false,
-            }}
-            setApi={setApi}
-            className="mt-8 relative"
-          >
-            <CarouselContent>
-              {categories.map((cat, index) => (
-                <CarouselItem key={index} className="basis-1/3">
-                  <div className="flex flex-col items-center p-4 bg-white rounded-lg border group">
-                    <div className="overflow-hidden rounded-lg group-hover:scale-105 transition-all duration-500">
-                      <Image
-                        className="hover:scale-110 transition-all"
-                        src="https://cafengon.monamedia.net/wp-content/uploads/2024/12/h28-cate4.png"
-                        alt={`Sản phẩm ${index + 1}`}
-                        width={200}
-                        height={200}
-                      />
+          {loading ? (
+            "Đang tải dữ liệu..."
+          ) : (
+            <Carousel
+              opts={{
+                align: "start",
+                duration: 20,
+                dragFree: false,
+              }}
+              setApi={setApi}
+              className="mt-8 relative"
+            >
+              <CarouselContent>
+                {categories.map((cat, index) => (
+                  <CarouselItem key={index} className="basis-1/3">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg border group">
+                      <div className="overflow-hidden rounded-lg group-hover:scale-105 transition-all duration-500">
+                        <Image
+                          className="hover:scale-110 transition-all"
+                          src="https://cafengon.monamedia.net/wp-content/uploads/2024/12/h28-cate4.png"
+                          alt={`Sản phẩm ${index + 1}`}
+                          width={200}
+                          height={200}
+                        />
+                      </div>
+                      <p className="font-semibold mt-2 transition-all group-hover:text-[#6f4323]">
+                        {cat.name}
+                      </p>
                     </div>
-                    <p className="font-semibold mt-2 transition-all group-hover:text-[#6f4323]">
-                      {cat.name}
-                    </p>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
 
-            {/* Arrows + Index */}
-            <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 flex gap-2 items-center">
-              <CarouselPrevious />
-              <div className=" text-[#333]">
-                {totalSlides === 0
-                  ? "0 / 0"
-                  : `${currentSlide} / ${totalSlides}`}
+              {/* Arrows + Index */}
+              <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 flex gap-2 items-center">
+                <CarouselPrevious />
+                <div className=" text-[#333]">
+                  {totalSlides === 0
+                    ? "0 / 0"
+                    : `${currentSlide} / ${totalSlides}`}
+                </div>
+                <CarouselNext />
               </div>
-              <CarouselNext />
-            </div>
-          </Carousel>
+            </Carousel>
+          )}
         </div>
         <div className="absolute bottom-0 right-7.5 opacity-30">
           <Image

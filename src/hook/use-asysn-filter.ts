@@ -41,5 +41,5 @@ export function useSyncFilters() {
     }
 
     router.push(`shop?${params.toString()}`, { scroll: false });
-  }, [categories, priceRange, sort, keyword, router, searchParams]);
+  }, [categories, priceRange, sort, keyword, router]);
 }
