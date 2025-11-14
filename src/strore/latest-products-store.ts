@@ -35,7 +35,7 @@ export const useLatestProductsStore = create<LatestProductState>((set) => ({
         latestProducts: json.data,
         loading: false,
       });
-    } catch (error: any) {
+    } catch (error) {
       set({
         error: getErrorMessage(error),
         loading: false,
