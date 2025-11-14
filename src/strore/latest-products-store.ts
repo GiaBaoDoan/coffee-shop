@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/constants/api";
+import { getErrorMessage } from "@/lib/utils";
 import { Product } from "@/types/product";
 import { create } from "zustand";
 
@@ -36,7 +37,7 @@ export const useLatestProductsStore = create<LatestProductState>((set) => ({
       });
     } catch (error: any) {
       set({
-        error: error.message || "Error fetching latest products",
+        error: getErrorMessage(error),
         loading: false,
       });
     }

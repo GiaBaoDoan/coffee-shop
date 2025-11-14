@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/constants/api";
+import { getErrorMessage } from "@/lib/utils";
 import { Category } from "@/types/product";
 import { create } from "zustand";
 
@@ -33,9 +34,9 @@ export const useCategoryStore = create<CategoryState>((set) => ({
         categories: json.data,
         loading: false,
       });
-    } catch (error: any) {
+    } catch (error) {
       set({
-        error: error.message || "Error fetching categories",
+        error: getErrorMessage(error),
         loading: false,
       });
     }
